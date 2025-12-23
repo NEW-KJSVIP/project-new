@@ -26,16 +26,18 @@ Pastikan sistem Anda memiliki alat dan dependensi berikut:
 
 Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan **Userbot** Anda.
 
-### 1. Persiapan Sistem & Kloning Repositori
+### Instalasi Awal
 
 ```bash
-# Update Sistem dan Instal Dependensi Dasar
-apt update && apt upgrade -y
-apt install ffmpeg -y
-apt install python3.10-venv
-
-# Kloning Repositori Proyek (Pastikan URL kloning sudah benar!)
-git clone [https://github.com/NEW-KJSVIP/project-new](https://github.com/NEW-KJSVIP/project-new)
-
-# Masuk ke Direktori Proyek
-cd project-new
+apt update && apt upgrade -y             # Memperbarui daftar paket dan meng-upgrade sistem
+git clone [https://github.com/NEW-KJSVIP/project-new](https://github.com/NEW-KJSVIP/project-new) # Kloning repositori proyek
+cd project-new                           # Masuk ke direktori proyek
+apt install ffmpeg -y                    # Instal FFmpeg (diperlukan untuk fitur media)
+bash installnode.sh                      # Instal Node.js (jika diperlukan)
+apt install python3.10-venv              # Instal paket untuk membuat Virtual Environment (VENV)
+python3 -m venv venv && source venv/bin/activate # Buat VENV dan aktifkan
+pip3 install -r requirements.txt         # Instal semua dependensi Python
+cp sample.env .env && nano .env          # Salin file konfigurasi dan edit variabel (APP_ID, API_HASH, dll.)
+screen -S ubot                           # Buat sesi screen baru bernama 'ubot'
+python3 -m PyroUbot                      # Jalankan Userbot
+# Setelah bot berjalan, tekan CTRL+A lalu D untuk keluar (detach) dari sesi screen.
