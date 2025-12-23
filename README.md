@@ -61,9 +61,9 @@ screen -S ubot
 ```
 python3 -m PyroUbot
 ```
-```
-# 🗿MENGHIDUPKAN JIKA UBOT MATI
-```
+
+## 🗿MENGHIDUPKAN JIKA UBOT MATI
+
 ```
 cd ubotalfnew && screen -S ubotalfnew
 ```
@@ -77,7 +77,7 @@ screen -S ubotalfnew
 python3 -m PyroUbot
 ```
 
-# 🔥PERINTAH UTAMA AUTO INSTALLER
+## 🔥PERINTAH UTAMA AUTO INSTALLER
 
 ```
 chmod +x installer.sh
