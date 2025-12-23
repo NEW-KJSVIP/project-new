@@ -19,25 +19,62 @@ WARN="${YELLOW}[!]${NC}"
 ERROR="${RED}[X]${NC}"
 
 # Variables
-REPO_URL="https://github.com/NEW-KJSVIP/project-new"
-REPO_DIR="project-new"
+REPO_OWNER="NEW-KJSVIP"
+REPO_NAME="project-new"
+REPO_URL="https://github.com/$REPO_OWNER/$REPO_NAME"
+REPO_DIR="$REPO_NAME"
+IP_FILE_PATH="izin/ip" # Path file izin/ip sesuai struktur repo
+RAW_IP_URL="https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/$IP_FILE_PATH"
 
 # Set Environment
 export DEBIAN_FRONTEND=noninteractive
 clear
 
 # ==========================================================
-# [BANNER] Tampilan Awal Keren
+# [BANNER] Tampilan Awal Keren (Tema KJS)
 # ==========================================================
 echo -e "${CYAN}========================================================${NC}"
-echo -e "${WHITE}  _  _ ___ ___ ___ _ _  ___ _  _ _   _ ___ _____ ___ ${NC}"
-echo -e "${WHITE} | || | __| _ \ __| | || __| || | | | | _ \_   _| __|${NC}"
-echo -e "${WHITE} | __ | _||   / _|| __ | _|| __ | |_| |   / | | | _| ${NC}"
-echo -e "${WHITE} |_||_|___|_|_\___|_||_|___|_||_|\___/|_|_\ |_| |___|${NC}"
-echo -e "${MAGENTA}                 :: INDONESIAN KJS ::          ${NC}"
+echo -e "${WHITE}  _  _ ___ ___  _  _ ___ _  _  ___ ___ _  _ _  _ ___ ${NC}"
+echo -e "${WHITE} | || | __| _ \ | \| | __| || ||_ _/ __| || | || | _ \ ${NC}"
+echo -e "${WHITE} | __ | _||   / | .` | _|| __ | | | (__| __ | __ |   /${NC}"
+echo -e "${WHITE} |_||_|___|_|_\_|\_/\_|___|_||_| |_|\___|_||_|_||_|_|_\\${NC}"
+echo -e "${MAGENTA}                 :: INDONESIAN KJS VIP ::             ${NC}"
 echo -e "${CYAN}========================================================${NC}"
 echo -e "${INFO} Inisiasi Instalasi Userbot Project-New...${NC}"
 echo -e "${CYAN}========================================================${NC}"
+
+# ==========================================================
+# [SECURITY CHECK] IP Whitelist Lock dari GitHub
+# ==========================================================
+echo -e "${INFO} Melakukan pengecekan IP Whitelist dari repositori...${NC}"
+CURRENT_IP=$(curl -sS ipv4.icanhazip.com)
+
+# 1. Download data IP dari GitHub
+IP_DATA=$(curl -sS $RAW_IP_URL)
+
+if [ $? -ne 0 ] || [ -z "$IP_DATA" ]; then
+    echo -e "${ERROR} Gagal mengambil data IP dari GitHub. Cek koneksi atau path file ${IP_FILE_PATH}.${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    echo -e "${RED}INSTALASI TERKUNCI. File IP Whitelist tidak ditemukan/diakses.${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    exit 1
+fi
+
+# 2. Ekstrak hanya alamat IP dari data (Kolom terakhir)
+# Menggunakan 'awk' untuk mengambil kolom terakhir (IP)
+ALLOWED_IPS_LIST=$(echo "$IP_DATA" | awk '{print $NF}' | grep -v '^#')
+
+# 3. Cek apakah IP saat ini ada dalam daftar yang diizinkan
+if grep -q "^$CURRENT_IP$" <<< "$ALLOWED_IPS_LIST"; then
+    echo -e "${GREEN}[ACCESS GRANTED]${NC} IP (${CURRENT_IP}) diizinkan. Melanjutkan instalasi."
+else
+    echo -e "${RED}[ACCESS DENIED]${NC} IP (${CURRENT_IP}) tidak terdaftar dalam Whitelist."
+    echo -e "${CYAN}========================================================${NC}"
+    echo -e "${RED}INSTALASI TERKUNCI. Hubungi Admin untuk otorisasi IP.${NC}"
+    echo -e "${CYAN}========================================================${NC}"
+    exit 1
+fi
+echo " " # Baris kosong untuk estetika
 
 # 1. System Update & Install Dependencies
 echo -e "${INFO} Memperbarui Sistem & Menginstal Alat Dasar...${NC}"
