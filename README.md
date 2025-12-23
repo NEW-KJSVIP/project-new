@@ -1,4 +1,4 @@
-# 🔥 Project-New Userbot
+# 🔥 Project-New KJS Userbot
 
 Userbot ini dikembangkan untuk memberikan kemudahan dan fungsionalitas tambahan bagi pengguna Telegram. Nikmati berbagai fitur canggih langsung dari akun Anda!
 
@@ -26,9 +26,8 @@ Pastikan sistem Anda memiliki alat dan dependensi berikut:
 
 Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan **Userbot** Anda.
 
-### Instalasi Awal
+### Instalasi Manual Userbot
 
-## Userbot
 ```
 apt update && apt upgrade -y
 ```
@@ -63,7 +62,7 @@ screen -S ubot
 python3 -m PyroUbot
 ```
 ```
----------- Menghidupan jika ubot mati -------------
+# 🗿MENGHIDUPKAN JIKA UBOT MATI
 ```
 ```
 cd ubotalfnew && screen -S ubotalfnew
@@ -78,7 +77,7 @@ screen -S ubotalfnew
 python3 -m PyroUbot
 ```
 
-# 🔥 PERINTAH UTAMA AUTO INSTALLER
+# 🔥PERINTAH UTAMA AUTO INSTALLER
 
 ```
 chmod +x installer.sh
