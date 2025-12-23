@@ -28,16 +28,52 @@ Ikuti langkah-langkah di bawah ini untuk menginstal dan menjalankan **Userbot** 
 
 ### Instalasi Awal
 
-```bash
-apt update && apt upgrade -y             # Memperbarui daftar paket dan meng-upgrade sistem
-git clone [https://github.com/NEW-KJSVIP/project-new](https://github.com/NEW-KJSVIP/project-new) # Kloning repositori proyek
-cd project-new                           # Masuk ke direktori proyek
-apt install ffmpeg -y                    # Instal FFmpeg (diperlukan untuk fitur media)
-bash installnode.sh                      # Instal Node.js (jika diperlukan)
-apt install python3.10-venv              # Instal paket untuk membuat Virtual Environment (VENV)
-python3 -m venv venv && source venv/bin/activate # Buat VENV dan aktifkan
-pip3 install -r requirements.txt         # Instal semua dependensi Python
-cp sample.env .env && nano .env          # Salin file konfigurasi dan edit variabel (APP_ID, API_HASH, dll.)
-screen -S ubot                           # Buat sesi screen baru bernama 'ubot'
-python3 -m PyroUbot                      # Jalankan Userbot
-# Setelah bot berjalan, tekan CTRL+A lalu D untuk keluar (detach) dari sesi screen.
+## Userbot
+```
+apt update && apt upgrade -y
+```
+```
+git clone https://github.com/ricoogh/ubot
+```
+```
+cd ubot && screen -S ubot
+```
+```
+apt install ffmpeg -y
+```
+```
+bash installnode.sh
+```
+```
+apt install python3.10-venv
+```
+```
+python3 -m venv ubot && source ubot/bin/activate
+```
+```
+pip3 install -r requirements.txt
+```
+```
+cp sample.env .env && nano .env
+```
+```
+screen -S ubot
+```
+```
+python3 -m PyroUbot
+```
+```
+---------- Menghidupan jika ubot mati -------------
+```
+```
+cd ubotalfnew && screen -S ubotalfnew
+```
+```
+python3 -m venv venv && source venv/bin/activate
+```
+```
+screen -S ubotalfnew
+```
+```
+python3 -m PyroUbot
+```
